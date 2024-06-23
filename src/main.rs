@@ -13,8 +13,16 @@ use encoding_decoding::{huffman_encode, LUMINANCE_AC_HUFFMAN_CODES,
 
 fn main() {
 
+    // Read input dir from args, if no args, use default "Kodak24"
+    let args: Vec<String> = std::env::args().collect();
+    let input_dir = if args.len() > 1 {
+        &args[1]
+    } else {
+        "Kodak24"
+    };
+    
     // Process all PNG images in the input directory
-    let input_dir = "Kodak24";
+    
     let output_dir = "CompressedImages";
 
     if !Path::new(output_dir).exists() {

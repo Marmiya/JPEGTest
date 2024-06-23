@@ -1,0 +1,8 @@
+[package]
+name = "jpeg_test"
+version = "0.1.0"
+authors = ["Mingyang Wang <michael.gonw@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+image = "*"

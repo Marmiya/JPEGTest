@@ -95,6 +95,12 @@ fn main() {
             let encoded_cr_data = huffman_encode(&mut zigzag_cr_blocks,
                  &CHROMINANCE_DC_HUFFMAN_CODES, &CHROMINANCE_AC_HUFFMAN_CODES);
 
+            // compute compression ratio
+            let original_size = orig_width * orig_height * 3; // 3 bytes per pixel
+            let compressed_size = encoded_y_data.len() + encoded_cb_data.len() + encoded_cr_data.len();
+            let compression_ratio = original_size as f64 / compressed_size as f64;
+            println!("Compression ratio for {}: {:.2}", file_path.file_stem().unwrap().to_str().unwrap(), compression_ratio);
+
             // 6. Decode and reconstruct image
             let decoded_y_data = encoding_decoding::huffman_decode(&encoded_y_data, 
                 &LUMINANCE_DC_HUFFMAN_CODES, &LUMINANCE_AC_HUFFMAN_CODES);
